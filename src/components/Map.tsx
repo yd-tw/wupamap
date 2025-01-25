@@ -66,7 +66,7 @@ export default function MRTMap() {
         .attr("fill", "white")
         .attr("stroke", "black")
         .attr("stroke-width", 2)
-        .on("mouseover", function (event: any, d: any) {
+        .on("mouseover", function () {
           d3.select(this).attr("fill", "orange");
         })
         .on("mouseout", function () {
