@@ -11,10 +11,10 @@
     { "id": "B3", "name": "", "x": -354, "y": -159 },
     { "id": "B4", "name": "", "x": -423, "y": -49 },
     { "id": "B5", "name": "", "x": -512, "y": -48 },
-    { "id": "B6", "name": "", "x": -664, "y":  198},
-    { "id": "B7", "name": "", "x": -664, "y":  426},
-    { "id": "B8", "name": "", "x": -486, "y":  532},
-    { "id": "B9", "name": "", "x": -487, "y":  973},
+    { "id": "B6", "name": "", "x": -664, "y": 198 },
+    { "id": "B7", "name": "", "x": -664, "y": 426 },
+    { "id": "B8", "name": "", "x": -486, "y": 532 },
+    { "id": "B9", "name": "", "x": -487, "y": 973 },
     { "id": "B10", "name": "", "x": -606, "y": 1238 },
     { "id": "C6", "name": "", "x": -342, "y": -368 },
     { "id": "C7", "name": "", "x": -325, "y": -630 },
@@ -35,10 +35,30 @@
     { "id": "E8", "name": "", "x": -1342, "y": 473 }
   ],
   "lines": [
-    { "id": "Line1", "color": "red", "stations": ["A1", "A2", "A3", "A4", "A5", "A6", "A1"] },
-    { "id": "Line2", "color": "blue", "stations": ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10"] },
-    { "id": "Line3", "color": "green", "stations": ["C6", "C7", "C8", "C9", "C10", "C11"] },
-    { "id": "Line4", "color": "yellow", "stations": ["A1", "D2", "D3", "D4", "D5", "D6"] },
-    { "id": "Line5", "color": "purple", "stations": ["A1", "E2", "E3", "E5", "E6", "E7", "E8"] }
+    {
+      "id": "Line1",
+      "color": "red",
+      "stations": ["A1", "A2", "A3", "A4", "A5", "A6", "A1"]
+    },
+    {
+      "id": "Line2",
+      "color": "blue",
+      "stations": ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10"]
+    },
+    {
+      "id": "Line3",
+      "color": "green",
+      "stations": ["C6", "C7", "C8", "C9", "C10", "C11"]
+    },
+    {
+      "id": "Line4",
+      "color": "yellow",
+      "stations": ["A1", "D2", "D3", "D4", "D5", "D6"]
+    },
+    {
+      "id": "Line5",
+      "color": "purple",
+      "stations": ["A1", "E2", "E3", "E5", "E6", "E7", "E8"]
+    }
   ]
 }

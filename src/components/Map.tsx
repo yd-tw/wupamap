@@ -17,11 +17,12 @@ export default function MRTMap() {
       .attr("viewBox", `0 0 ${width} ${height}`)
       .style("border", "1px solid #ccc")
       .call(
-        d3.zoom<SVGSVGElement, unknown>()
+        d3
+          .zoom<SVGSVGElement, unknown>()
           .scaleExtent([0.5, 100])
           .on("zoom", (event) => {
             svg.select("g").attr("transform", event.transform.toString());
-          })
+          }),
       );
 
     // 載入捷運數據
@@ -50,7 +51,7 @@ export default function MRTMap() {
             d3
               .line<any>()
               .x((d: { x: any }) => d.x)
-              .y((d: { y: any }) => d.y)
+              .y((d: { y: any }) => d.y),
           );
       });
 
