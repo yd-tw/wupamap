@@ -25,8 +25,8 @@ export default function MRTMap() {
           }),
       );
 
-    // 載入捷運數據
-    d3.json("/mrt-map.json").then((data: any) => {
+    // 載入數據
+    d3.json("/map.json").then((data: any) => {
       if (!data) return;
       const { stations, lines } = data;
 
