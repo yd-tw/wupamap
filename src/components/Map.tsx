@@ -9,20 +9,20 @@ export default function MRTMap() {
   useEffect(() => {
     if (!svgRef.current) return;
     const svg = d3.select<SVGSVGElement, unknown>(svgRef.current);
-    const width = 400;
-    const height = 300;
-
     svg.selectAll("*").remove();
     svg
-      .attr("viewBox", `0 0 ${width} ${height}`)
-      .style("border", "1px solid #ccc")
+      .attr("viewBox", `-200 -200 400 400`)
       .call(
         d3
-          .zoom<SVGSVGElement, unknown>()
-          .scaleExtent([0.5, 100])
-          .on("zoom", (event) => {
-            svg.select("g").attr("transform", event.transform.toString());
-          }),
+        .zoom<SVGSVGElement, unknown>()
+        .scaleExtent([0.1, 2])
+        .translateExtent([
+          [-2000, -2000],
+          [2000, 2000],
+        ])
+        .on("zoom", (event) => {
+          svg.select("g").attr("transform", event.transform.toString());
+        }),
       );
 
     // 載入數據
@@ -81,7 +81,7 @@ export default function MRTMap() {
         .attr("class", "label")
         .attr("x", (d: any) => d.x + 8)
         .attr("y", (d: any) => d.y + 4)
-        .text((d: any) => d.name)
+        .text((d: any) => d.id + d.name)
         .attr("fill", "black")
         .style("font-size", "10px");
     });
