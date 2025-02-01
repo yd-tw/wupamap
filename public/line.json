@@ -115,7 +115,7 @@
   {
     "id": "h1",
     "name": "高鐵一號線",
-    "color": "yellow",
+    "color": "LightBlue",
     "points": [
       { "x": -191, "y": -130 },
       { "x": 340, "y": -130 }
@@ -124,7 +124,7 @@
   {
     "id": "h2",
     "name": "高鐵二號線",
-    "color": "yellow",
+    "color": "LightBlue",
     "points": [
       { "x": -317, "y": -1491 },
       { "x": -317, "y": 206 }
@@ -133,7 +133,7 @@
   {
     "id": "r1",
     "name": "重鐵一號線",
-    "color": "gray",
+    "color": "LightGray",
     "points": [
       { "x": 100, "y": -64 },
       { "x": 100, "y": 90 },
@@ -146,7 +146,7 @@
   {
     "id": "r2",
     "name": "重鐵二號線",
-    "color": "gray",
+    "color": "LightGray",
     "points": [
       { "x": 100, "y": -64 },
       { "x": 100, "y": -332 },
@@ -159,7 +159,7 @@
   {
     "id": "r3",
     "name": "重鐵三號線",
-    "color": "gray",
+    "color": "LightGray",
     "points": [
       { "x": 100, "y": -64 },
       { "x": 100, "y": 366 }
@@ -168,7 +168,7 @@
   {
     "id": "r4",
     "name": "重鐵四號線",
-    "color": "gray",
+    "color": "LightGray",
     "points": [
       { "x": 100, "y": -64 },
       { "x": 100, "y": 90 },
@@ -185,7 +185,7 @@
   {
     "id": "r5",
     "name": "重鐵五號線",
-    "color": "gray",
+    "color": "LightGray",
     "points": [
       { "x": -250, "y": 280 },
       { "x": -500, "y": 280 },
@@ -195,7 +195,7 @@
   {
     "id": "r6",
     "name": "重鐵六號線",
-    "color": "gray",
+    "color": "LightGray",
     "points": [
       { "x": -250, "y": 280 },
       { "x": -500, "y": 280 },

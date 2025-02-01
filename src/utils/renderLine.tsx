@@ -23,7 +23,7 @@ export function renderLine(
         .datum(line.points)
         .attr("fill", "none")
         .attr("stroke", line.color)
-        .attr("stroke-width", 4)
+        .attr("stroke-width", 5)
         .attr(
           "d",
           d3

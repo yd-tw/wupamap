@@ -46,7 +46,7 @@ export function renderStation(
       .attr("class", "label")
       .attr("x", (d) => d.x + 8)
       .attr("y", (d) => d.y + 4)
-      .text((d) => d.id + d.name)
+      .text((d) => d.name)
       .attr("fill", "black")
       .style("font-size", "10px");
   });

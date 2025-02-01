@@ -29,8 +29,8 @@ export default function MRTMap() {
     const g = svg.append("g");
 
     renderRiver(g);
-    renderStation(g);
     renderLine(g);
+    renderStation(g);  
   }, []);
 
   return <svg ref={svgRef} className="h-full w-full"></svg>;
