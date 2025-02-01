@@ -2,7 +2,8 @@
 
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
-import { renderMRT } from "@/utils/renderMRT";
+import { renderStation } from "@/utils/renderStation";
+import { renderLine } from "@/utils/renderLine";
 import { renderRiver } from "@/utils/renderRiver";
 
 export default function MRTMap() {
@@ -28,7 +29,8 @@ export default function MRTMap() {
     const g = svg.append("g");
 
     renderRiver(g);
-    renderMRT(g);
+    renderStation(g);
+    renderLine(g);
   }, []);
 
   return <svg ref={svgRef} className="h-full w-full"></svg>;

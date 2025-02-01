@@ -1,10 +1,5 @@
 import * as d3 from "d3";
 
-interface Mrt {
-  stations: Station[];
-  lines: Line[];
-}
-
 interface Station {
   id: string;
   name: string;
@@ -12,45 +7,22 @@ interface Station {
   y: number;
 }
 
-interface Line {
-  id: string;
-  color: string;
-  stations: string[];
-}
 
-export function renderMRT(
+export function renderStation(
   g: d3.Selection<SVGGElement, unknown, null, undefined>,
 ) {
-  d3.json<Mrt>("/mrt.json").then((data) => {
+  d3.json<Station[]>("/station.json").then((data) => {
     if (!data) return;
-    const { stations, lines } = data;
 
     // 建立站點索引
     const stationMap: Record<string, Station> = {};
-    stations.forEach((station: Station) => {
+    data.forEach((station: Station) => {
       stationMap[station.id] = station;
-    });
-
-    // 繪製捷運路線
-    lines.forEach((line: Line) => {
-      const lineStations = line.stations.map((id: string) => stationMap[id]);
-      g.append("path")
-        .datum(lineStations)
-        .attr("fill", "none")
-        .attr("stroke", line.color)
-        .attr("stroke-width", 4)
-        .attr(
-          "d",
-          d3
-            .line<Station>()
-            .x((d) => d.x)
-            .y((d) => d.y),
-        );
     });
 
     // 繪製站點
     g.selectAll("circle")
-      .data(stations)
+      .data(data)
       .enter()
       .append("circle")
       .attr("cx", (d) => d.x)
@@ -68,7 +40,7 @@ export function renderMRT(
 
     // 標記站名
     g.selectAll("text.label")
-      .data(stations)
+      .data(data)
       .enter()
       .append("text")
       .attr("class", "label")
