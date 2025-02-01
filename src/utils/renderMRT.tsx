@@ -1,20 +1,38 @@
 import * as d3 from "d3";
 
+interface Mrt {
+  stations: Station[];
+  lines: Line[];
+}
+
+interface Station {
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+}
+
+interface Line {
+  id: string;
+  color: string;
+  stations: string[];
+}
+
 export function renderMRT(
   g: d3.Selection<SVGGElement, unknown, null, undefined>,
 ) {
-  d3.json("/mrt.json").then((data: any) => {
+  d3.json<Mrt>("/mrt.json").then((data) => {
     if (!data) return;
     const { stations, lines } = data;
 
     // 建立站點索引
-    const stationMap: Record<string, any> = {};
-    stations.forEach((station: any) => {
+    const stationMap: Record<string, Station> = {};
+    stations.forEach((station: Station) => {
       stationMap[station.id] = station;
     });
 
     // 繪製捷運路線
-    lines.forEach((line: any) => {
+    lines.forEach((line: Line) => {
       const lineStations = line.stations.map((id: string) => stationMap[id]);
       g.append("path")
         .datum(lineStations)
@@ -24,9 +42,9 @@ export function renderMRT(
         .attr(
           "d",
           d3
-            .line<any>()
-            .x((d: { x: any }) => d.x)
-            .y((d: { y: any }) => d.y),
+            .line<Station>()
+            .x((d) => d.x)
+            .y((d) => d.y),
         );
     });
 
@@ -35,8 +53,8 @@ export function renderMRT(
       .data(stations)
       .enter()
       .append("circle")
-      .attr("cx", (d: any) => d.x)
-      .attr("cy", (d: any) => d.y)
+      .attr("cx", (d) => d.x)
+      .attr("cy", (d) => d.y)
       .attr("r", 6)
       .attr("fill", "white")
       .attr("stroke", "black")
@@ -54,9 +72,9 @@ export function renderMRT(
       .enter()
       .append("text")
       .attr("class", "label")
-      .attr("x", (d: any) => d.x + 8)
-      .attr("y", (d: any) => d.y + 4)
-      .text((d: any) => d.id + d.name)
+      .attr("x", (d) => d.x + 8)
+      .attr("y", (d) => d.y + 4)
+      .text((d) => d.id + d.name)
       .attr("fill", "black")
       .style("font-size", "10px");
   });
