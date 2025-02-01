@@ -1,6 +1,8 @@
 import * as d3 from "d3";
 
-export function renderMRT(g: d3.Selection<SVGGElement, unknown, null, undefined>) {
+export function renderMRT(
+  g: d3.Selection<SVGGElement, unknown, null, undefined>,
+) {
   d3.json("/mrt.json").then((data: any) => {
     if (!data) return;
     const { stations, lines } = data;

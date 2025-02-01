@@ -12,10 +12,8 @@ export default function MRTMap() {
     if (!svgRef.current) return;
     const svg = d3.select<SVGSVGElement, unknown>(svgRef.current);
     svg.selectAll("*").remove();
-    svg
-      .attr("viewBox", `-200 -200 400 400`)
-      .call(
-        d3
+    svg.attr("viewBox", `-200 -200 400 400`).call(
+      d3
         .zoom<SVGSVGElement, unknown>()
         .scaleExtent([0.1, 2])
         .translateExtent([
@@ -25,7 +23,7 @@ export default function MRTMap() {
         .on("zoom", (event) => {
           svg.select("g").attr("transform", event.transform.toString());
         }),
-      );
+    );
 
     const g = svg.append("g");
 
@@ -33,5 +31,5 @@ export default function MRTMap() {
     renderMRT(g);
   }, []);
 
-  return <svg ref={svgRef} className="w-full h-full"></svg>;
+  return <svg ref={svgRef} className="h-full w-full"></svg>;
 }
