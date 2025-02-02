@@ -11,7 +11,10 @@ interface MapProps {
   zoomLevel?: number; // 預設縮放倍率
 }
 
-export default function Map({ center = { x: 0, y: 0 }, zoomLevel = 1 }: MapProps) {
+export default function Map({
+  center = { x: 0, y: 0 },
+  zoomLevel = 1,
+}: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
