@@ -4,6 +4,7 @@ interface Line {
   id: string;
   name: string;
   color: string;
+  width: number;
   points: Point[];
 }
 
@@ -23,7 +24,7 @@ export function renderLine(
         .datum(line.points)
         .attr("fill", "none")
         .attr("stroke", line.color)
-        .attr("stroke-width", 5)
+        .attr("stroke-width", line.width)
         .attr(
           "d",
           d3

@@ -7,7 +7,6 @@ interface Station {
   y: number;
 }
 
-
 export function renderStation(
   g: d3.Selection<SVGGElement, unknown, null, undefined>,
 ) {

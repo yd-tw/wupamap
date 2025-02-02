@@ -22,7 +22,7 @@ export function renderRiver(
       g.append("path")
         .datum(river.points)
         .attr("fill", "none")
-        .attr("stroke", "#1E90FF")
+        .attr("stroke", "LightBlue")
         .attr("stroke-width", river.width)
         .attr(
           "d",
