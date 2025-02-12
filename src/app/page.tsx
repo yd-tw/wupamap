@@ -1,29 +1,15 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Map from "@/components/Map";
+import { Suspense, useState } from "react";
+import { useRouter } from "next/navigation";
+import MapWithParams from "@/components/MapParams";
+import pkg from "../../package.json";
 
 export default function Page() {
-  const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-  const [z, setZ] = useState(1);
-
-  useEffect(() => {
-    const px = parseFloat(searchParams.get("x") || "0");
-    const py = parseFloat(searchParams.get("y") || "0");
-    const pz = parseFloat(searchParams.get("z") || "1");
-
-    setX(isNaN(px) ? 0 : px);
-    setY(isNaN(py) ? 0 : py);
-    setZ(isNaN(pz) ? 1 : pz);
-  }, [searchParams]);
-
-  const [inputX, setInputX] = useState(x);
-  const [inputY, setInputY] = useState(y);
+  const [inputX, setInputX] = useState(0);
+  const [inputY, setInputY] = useState(0);
 
   const updateMapPosition = () => {
     router.push(`?x=${inputX}&y=${inputY}&z=2`);
@@ -59,7 +45,13 @@ export default function Page() {
         </div>
       </div>
       <div className="h-full w-full bg-gray-100">
-        <Map center={{ x, y }} zoomLevel={z} />
+        <Suspense fallback={<div>載入地圖中...</div>}>
+          <MapWithParams />
+        </Suspense>
+      </div>
+      <div className="absolute right-1 bottom-1 z-10 flex space-x-2">
+        <p className="text-sm">網站版本: {pkg.version}</p>
+        <p className="text-sm">網站作者: YD</p>
       </div>
     </main>
   );

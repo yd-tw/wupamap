@@ -11,7 +11,7 @@ interface MapProps {
   zoomLevel?: number; // 預設縮放倍率
 }
 
-export default function Map({
+export default function MapRender({
   center = { x: 0, y: 0 },
   zoomLevel = 1,
 }: MapProps) {
