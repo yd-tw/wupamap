@@ -17,7 +17,7 @@ export default function Page() {
 
   return (
     <main className="relative h-screen w-screen">
-      <div className="absolute left-4 top-4 z-10 bg-white bg-opacity-75 p-2 rounded-lg shadow flex flex-col space-y-2">
+      <div className="absolute left-4 top-4 z-10 bg-white bg-opacity-75 p-2 rounded-lg shadow-sm flex flex-col space-y-2">
         <h1 className="p-2 text-2xl">嗚帕線上路線圖</h1>
         <div className="flex items-center">
           <span>x:</span>
@@ -26,7 +26,7 @@ export default function Page() {
             value={inputX}
             onChange={(e) => setInputX(parseFloat(e.target.value) || 0)}
             placeholder="X 座標"
-            className="border p-1 w-20 rounded"
+            className="border p-1 w-20 rounded-sm"
           />
           <span>y:</span>
           <input
@@ -34,11 +34,11 @@ export default function Page() {
             value={inputY}
             onChange={(e) => setInputY(parseFloat(e.target.value) || 0)}
             placeholder="Y 座標"
-            className="border p-1 w-20 rounded"
+            className="border p-1 w-20 rounded-sm"
           />
           <button
             onClick={updateMapPosition}
-            className="bg-blue-500 text-white p-2 rounded"
+            className="bg-blue-500 text-white p-2 rounded-sm"
           >
             快速定位
           </button>
