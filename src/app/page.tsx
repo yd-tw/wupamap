@@ -44,7 +44,7 @@ export default function Page() {
           </button>
         </div>
       </div>
-      <div className="h-full w-full bg-gray-100">
+      <div className="h-full w-full bg-[#d3f8e2]">
         <Suspense fallback={<div>載入地圖中...</div>}>
           <MapWithParams />
         </Suspense>
