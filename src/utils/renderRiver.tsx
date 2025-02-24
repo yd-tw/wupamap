@@ -1,6 +1,6 @@
 import * as d3 from "d3";
-import { collection, getDocs } from "firebase/firestore";
 import db from "@/utils/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 interface River {
   id: string;
@@ -40,7 +40,6 @@ export async function renderRiver(
   g: d3.Selection<SVGGElement, unknown, null, undefined>,
 ) {
   const rivers = await fetchRivers();
-
   if (rivers.length === 0) return;
 
   rivers.forEach((river) => {
