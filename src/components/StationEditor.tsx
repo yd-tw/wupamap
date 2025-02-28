@@ -1,14 +1,26 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { Station } from "@/types/station";
 import { fetchCollection } from "@/utils/fetchCollection";
 import { setDocument } from "@/utils/setDocument";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 
 export default function StationEditor() {
   const [stations, setStations] = useState<Station[]>([]);
@@ -30,9 +42,16 @@ export default function StationEditor() {
 
   const handleSave = async () => {
     if (!editingStation) return;
-    const updatedStation = { ...editingStation, name, x: Number(x), y: Number(y) };
+    const updatedStation = {
+      ...editingStation,
+      name,
+      x: Number(x),
+      y: Number(y),
+    };
     await setDocument("stations", updatedStation.id, updatedStation);
-    setStations(stations.map(s => (s.id === updatedStation.id ? updatedStation : s)));
+    setStations(
+      stations.map((s) => (s.id === updatedStation.id ? updatedStation : s)),
+    );
     setEditingStation(null);
   };
 
@@ -70,18 +89,40 @@ export default function StationEditor() {
         </CardContent>
       </Card>
       {editingStation && (
-        <Dialog open={!!editingStation} onOpenChange={() => setEditingStation(null)}>
+        <Dialog
+          open={!!editingStation}
+          onOpenChange={() => setEditingStation(null)}
+        >
           <DialogContent>
             <DialogHeader>
               <DialogTitle>編輯車站</DialogTitle>
             </DialogHeader>
             <div className="space-y-2">
-              <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="名稱" />
-              <Input value={x} onChange={(e) => setX(e.target.value)} placeholder="X 座標" type="number" />
-              <Input value={y} onChange={(e) => setY(e.target.value)} placeholder="Y 座標" type="number" />
+              <Input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="名稱"
+              />
+              <Input
+                value={x}
+                onChange={(e) => setX(e.target.value)}
+                placeholder="X 座標"
+                type="number"
+              />
+              <Input
+                value={y}
+                onChange={(e) => setY(e.target.value)}
+                placeholder="Y 座標"
+                type="number"
+              />
               <div className="flex space-x-2">
                 <Button onClick={handleSave}>儲存</Button>
-                <Button onClick={() => setEditingStation(null)} variant="outline">取消</Button>
+                <Button
+                  onClick={() => setEditingStation(null)}
+                  variant="outline"
+                >
+                  取消
+                </Button>
               </div>
             </div>
           </DialogContent>

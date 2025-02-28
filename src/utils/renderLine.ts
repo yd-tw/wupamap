@@ -22,4 +22,4 @@ export async function renderLine(
           .y((d) => d.y),
       );
   });
-};
+}

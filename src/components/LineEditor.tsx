@@ -4,8 +4,20 @@ import { Line } from "@/types/line";
 import { fetchCollection } from "@/utils/fetchCollection";
 import { setDocument } from "@/utils/setDocument";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
@@ -30,7 +42,11 @@ export default function LineEditor() {
     }
   };
 
-  const handlePointChange = (index: number, field: "x" | "y", value: number) => {
+  const handlePointChange = (
+    index: number,
+    field: "x" | "y",
+    value: number,
+  ) => {
     if (editingLine) {
       const updatedPoints = [...editingLine.points];
       updatedPoints[index] = { ...updatedPoints[index], [field]: value };
@@ -41,7 +57,9 @@ export default function LineEditor() {
   const handleSubmit = async () => {
     if (editingLine) {
       await setDocument("lines", editingLine.id, editingLine);
-      setLines((prev) => prev.map((l) => (l.id === editingLine.id ? editingLine : l)));
+      setLines((prev) =>
+        prev.map((l) => (l.id === editingLine.id ? editingLine : l)),
+      );
       setEditingLine(null);
       setIsEditing(false);
     }
@@ -72,7 +90,10 @@ export default function LineEditor() {
                   <TableCell>{line.name}</TableCell>
                   <TableCell>{line.width}</TableCell>
                   <TableCell>
-                    <div className="w-6 h-6 rounded-full" style={{ backgroundColor: line.color }} />
+                    <div
+                      className="w-6 h-6 rounded-full"
+                      style={{ backgroundColor: line.color }}
+                    />
                   </TableCell>
                   <TableCell>
                     <Dialog>
@@ -106,13 +127,25 @@ export default function LineEditor() {
                             <Input
                               type="number"
                               value={point.x}
-                              onChange={(e) => handlePointChange(index, "x", Number(e.target.value))}
+                              onChange={(e) =>
+                                handlePointChange(
+                                  index,
+                                  "x",
+                                  Number(e.target.value),
+                                )
+                              }
                               placeholder="X 座標"
                             />
                             <Input
                               type="number"
                               value={point.y}
-                              onChange={(e) => handlePointChange(index, "y", Number(e.target.value))}
+                              onChange={(e) =>
+                                handlePointChange(
+                                  index,
+                                  "y",
+                                  Number(e.target.value),
+                                )
+                              }
                               placeholder="Y 座標"
                             />
                           </div>

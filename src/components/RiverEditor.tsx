@@ -5,16 +5,30 @@ import { River } from "@/types/river";
 import { fetchCollection } from "@/utils/fetchCollection";
 import { setDocument } from "@/utils/setDocument";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
 export default function RiverEditor() {
   const [rivers, setRivers] = useState<River[]>([]);
   const [selectedRiver, setSelectedRiver] = useState<River | null>(null);
   const [editedName, setEditedName] = useState("");
-  const [editedPoints, setEditedPoints] = useState<{ x: number; y: number }[]>([]);
+  const [editedPoints, setEditedPoints] = useState<{ x: number; y: number }[]>(
+    [],
+  );
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -30,9 +44,15 @@ export default function RiverEditor() {
 
   const handleSave = async () => {
     if (!selectedRiver) return;
-    const updatedRiver = { ...selectedRiver, name: editedName, points: editedPoints };
+    const updatedRiver = {
+      ...selectedRiver,
+      name: editedName,
+      points: editedPoints,
+    };
     await setDocument("rivers", updatedRiver.id, updatedRiver);
-    setRivers((prev) => prev.map((r) => (r.id === updatedRiver.id ? updatedRiver : r)));
+    setRivers((prev) =>
+      prev.map((r) => (r.id === updatedRiver.id ? updatedRiver : r)),
+    );
     setSelectedRiver(null);
     setIsDialogOpen(false);
   };
@@ -90,7 +110,10 @@ export default function RiverEditor() {
                         <DialogTitle>編輯河流</DialogTitle>
                         <div>
                           <label>名稱：</label>
-                          <Input value={editedName} onChange={(e) => setEditedName(e.target.value)} />
+                          <Input
+                            value={editedName}
+                            onChange={(e) => setEditedName(e.target.value)}
+                          />
                         </div>
                         <div>
                           <label>座標：</label>
@@ -99,12 +122,24 @@ export default function RiverEditor() {
                               <Input
                                 type="number"
                                 value={p.x}
-                                onChange={(e) => updatePoint(index, "x", Number(e.target.value))}
+                                onChange={(e) =>
+                                  updatePoint(
+                                    index,
+                                    "x",
+                                    Number(e.target.value),
+                                  )
+                                }
                               />
                               <Input
                                 type="number"
                                 value={p.y}
-                                onChange={(e) => updatePoint(index, "y", Number(e.target.value))}
+                                onChange={(e) =>
+                                  updatePoint(
+                                    index,
+                                    "y",
+                                    Number(e.target.value),
+                                  )
+                                }
                               />
                             </div>
                           ))}
