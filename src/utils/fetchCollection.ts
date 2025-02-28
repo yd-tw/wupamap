@@ -15,3 +15,5 @@ export async function fetchCollection<T>(collectionName: string): Promise<T[]> {
     return [];
   }
 }
+
+
