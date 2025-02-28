@@ -1,6 +1,6 @@
 {
   "name": "wupamap",
-  "version": "1.0.2",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -10,16 +10,16 @@
     "format": "npx prettier --write ."
   },
   "dependencies": {
-    "@next/third-parties": "^15.1.7",
+    "@next/third-parties": "^15.2.0",
     "d3": "^7.9.0",
-    "firebase": "^11.3.1",
-    "next": "^15.1.7",
+    "firebase": "^11.4.0",
+    "next": "^15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",
-    "@tailwindcss/postcss": "^4.0.8",
+    "@tailwindcss/postcss": "^4.0.9",
     "@types/d3": "^7.4.3",
     "@types/node": "^22.13.5",
     "@types/react": "^19.0.10",

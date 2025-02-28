@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import db from "@/utils/firebase";
+import db from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 interface River {
