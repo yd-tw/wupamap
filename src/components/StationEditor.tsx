@@ -6,6 +6,7 @@ import { fetchCollection } from "@/utils/fetchCollection";
 import { setDocument } from "@/utils/setDocument";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"
 
@@ -69,11 +70,11 @@ export default function StationEditor() {
         </CardContent>
       </Card>
       {editingStation && (
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitle>編輯車站</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <Dialog open={!!editingStation} onOpenChange={() => setEditingStation(null)}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>編輯車站</DialogTitle>
+            </DialogHeader>
             <div className="space-y-2">
               <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="名稱" />
               <Input value={x} onChange={(e) => setX(e.target.value)} placeholder="X 座標" type="number" />
@@ -83,8 +84,8 @@ export default function StationEditor() {
                 <Button onClick={() => setEditingStation(null)} variant="outline">取消</Button>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );
