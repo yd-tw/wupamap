@@ -12,7 +12,7 @@ export default async function Page() {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold">資料管理頁面</h1>
+      <h1 className="text-2xl font-bold">地圖資料列表</h1>
       
       {/* 顯示線路資料 */}
       <Card>
@@ -25,6 +25,8 @@ export default async function Page() {
               <TableRow>
                 <TableHead>ID</TableHead>
                 <TableHead>名稱</TableHead>
+                <TableHead>寬度</TableHead>
+                <TableHead>顏色</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -32,6 +34,8 @@ export default async function Page() {
                 <TableRow key={line.id}>
                   <TableCell>{line.id}</TableCell>
                   <TableCell>{line.name}</TableCell>
+                  <TableCell>{line.width}</TableCell>
+                  <TableCell>{line.color}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -50,6 +54,7 @@ export default async function Page() {
               <TableRow>
                 <TableHead>ID</TableHead>
                 <TableHead>名稱</TableHead>
+                <TableHead>寬度</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -57,6 +62,7 @@ export default async function Page() {
                 <TableRow key={river.id}>
                   <TableCell>{river.id}</TableCell>
                   <TableCell>{river.name}</TableCell>
+                  <TableCell>{river.width}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -75,6 +81,8 @@ export default async function Page() {
               <TableRow>
                 <TableHead>ID</TableHead>
                 <TableHead>名稱</TableHead>
+                <TableHead>X 座標</TableHead>
+                <TableHead>Y 座標</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -82,6 +90,8 @@ export default async function Page() {
                 <TableRow key={station.id}>
                   <TableCell>{station.id}</TableCell>
                   <TableCell>{station.name}</TableCell>
+                  <TableCell>{station.x}</TableCell>
+                  <TableCell>{station.y}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
