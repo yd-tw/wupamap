@@ -4,6 +4,7 @@ import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import MapWithParams from "@/components/MapParams";
 import pkg from "../../package.json";
+import Link from "next/link";
 
 export default function Page() {
   const router = useRouter();
@@ -16,39 +17,48 @@ export default function Page() {
   };
 
   return (
-    <main className="relative h-screen w-screen">
-      <div className="bg-opacity-75 absolute top-4 left-4 z-10 flex flex-col space-y-2 rounded-lg bg-white p-2 shadow-sm">
-        <h1 className="p-2 text-2xl">嗚帕線上路線圖</h1>
-        <div className="flex items-center">
-          <span>x:</span>
+    <main className="relative h-screen w-screen bg-gray-100">
+      {/* 控制面板 */}
+      <div className="absolute top-4 left-4 z-10 flex flex-col space-y-3 rounded-xl bg-white/80 p-4 shadow-lg backdrop-blur-md">
+        <h1 className="text-2xl font-semibold text-gray-800">嗚帕線上路線圖</h1>
+        <div className="flex items-center space-x-2">
+          <label className="text-gray-700">X:</label>
           <input
             type="number"
             value={inputX}
             onChange={(e) => setInputX(parseFloat(e.target.value) || 0)}
-            placeholder="X 座標"
-            className="w-20 rounded-sm border p-1"
+            className="w-18 rounded-md border border-gray-300 p-2 text-gray-900 focus:border-blue-500 focus:outline-none"
           />
-          <span>y:</span>
+          <label className="text-gray-700">Y:</label>
           <input
             type="number"
             value={inputY}
             onChange={(e) => setInputY(parseFloat(e.target.value) || 0)}
-            placeholder="Y 座標"
-            className="w-20 rounded-sm border p-1"
+            className="w-18 rounded-md border border-gray-300 p-2 text-gray-900 focus:border-blue-500 focus:outline-none"
           />
-          <button onClick={updateMapPosition} className="rounded-sm bg-blue-500 p-2 text-white">
-            快速定位
+          <button
+            onClick={updateMapPosition}
+            className="rounded-md bg-blue-600 px-4 py-2 text-white shadow-md transition hover:bg-blue-700"
+          >
+            定位
           </button>
         </div>
+        <Link href="/edit">
+          <span className="text-blue-500 hover:underline">編輯地圖</span>
+        </Link>
       </div>
-      <div className="h-full w-full bg-[#d3f8e2]">
-        <Suspense fallback={<div>載入地圖中...</div>}>
+
+      {/* 地圖區塊 */}
+      <div className="h-full w-full bg-[#d3f8e2] animate-fadeIn">
+        <Suspense fallback={<div className="text-center text-gray-500">載入地圖中...</div>}>
           <MapWithParams />
         </Suspense>
       </div>
-      <div className="absolute right-1 bottom-1 z-10 flex space-x-2">
-        <p className="text-sm">網站版本: {pkg.version}</p>
-        <p className="text-sm">網站作者: YD</p>
+
+      {/* 底部資訊 */}
+      <div className="absolute bottom-2 right-2 z-10 flex space-x-3 bg-white/80 px-3 py-2 rounded-lg shadow-md">
+        <p className="text-sm text-gray-700">網站版本: {pkg.version}</p>
+        <p className="text-sm text-gray-700">網站作者: YD</p>
       </div>
     </main>
   );

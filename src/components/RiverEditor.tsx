@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import toast from "react-hot-toast";
 
 export default function RiverEditor() {
   const [rivers, setRivers] = useState<River[]>([]);
@@ -61,11 +62,13 @@ export default function RiverEditor() {
         <CardContent>
           <Button
             onClick={() => {
-              setSelectedRiver(null);
-              setEditedId("");
-              setEditedName("");
-              setEditedPoints([]);
-              setIsDialogOpen(true);
+              toast.error("功能開發中");
+
+              // setSelectedRiver(null);
+              // setEditedId("");
+              // setEditedName("");
+              // setEditedPoints([]);
+              // setIsDialogOpen(true);
             }}
           >
             新增河流
@@ -102,7 +105,12 @@ export default function RiverEditor() {
                     </Dialog>
                   </TableCell>
                   <TableCell>
-                    <Button onClick={() => handleEdit(river)}>編輯</Button>
+                    <Button onClick={() => {
+                      toast.error("功能開發中");
+                      // handleEdit(river)
+                    }}>
+                      編輯
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

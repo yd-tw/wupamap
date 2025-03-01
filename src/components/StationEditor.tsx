@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import toast from "react-hot-toast";
 
 export default function StationEditor() {
   const [stations, setStations] = useState<Station[]>([]);
@@ -59,12 +60,14 @@ export default function StationEditor() {
         <CardContent>
           <Button
             onClick={() => {
-              setNewStation(true);
-              setEditingStation(null);
-              setId("");
-              setName("");
-              setX("");
-              setY("");
+              toast.error("功能開發中");
+
+              // setNewStation(true);
+              // setEditingStation(null);
+              // setId("");
+              // setName("");
+              // setX("");
+              // setY("");
             }}
           >
             新增車站
