@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { River } from "@/types/river";
-import { fetchCollection } from "@/utils/fetchCollection";
-import { setDocument } from "@/utils/setDocument";
+import { fetchCollection, setDocument } from "@/utils/firestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,

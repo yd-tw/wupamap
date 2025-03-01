@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { Mark } from "@/types/mark";
-import { fetchCollection } from "@/utils/fetchCollection";
+import { fetchCollection } from "@/utils/firestore";
 
 export async function renderMark(
   g: d3.Selection<SVGGElement, unknown, null, undefined>

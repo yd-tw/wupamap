@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { Line, Point } from "@/types/line";
-import { fetchCollection } from "./fetchCollection";
+import { fetchCollection } from "./firestore";
 
 export async function renderLine(
   g: d3.Selection<SVGGElement, unknown, null, undefined>,

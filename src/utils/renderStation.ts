@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { Station } from "@/types/station";
-import { fetchCollection } from "./fetchCollection";
+import { fetchCollection } from "./firestore";
 
 export async function renderStation(
   g: d3.Selection<SVGGElement, unknown, null, undefined>,

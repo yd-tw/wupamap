@@ -2,65 +2,32 @@
 
 import { useEffect, useState } from "react";
 import { Mark } from "@/types/mark";
-import { fetchCollection } from "@/utils/fetchCollection";
-import { setDocument } from "@/utils/setDocument";
+import { fetchCollection, setDocument } from "@/utils/firestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function MarkEditor() {
   const [marks, setMarks] = useState<Mark[]>([]);
-  const [editingMark, setEditingMark] = useState<Mark | null>(null);
-  const [newMark, setNewMark] = useState(false);
-  const [id, setId] = useState("");
-  const [name, setName] = useState("");
-  const [x, setX] = useState("");
-  const [y, setY] = useState("");
+  const [currentMark, setCurrentMark] = useState<Partial<Mark> | null>(null);
 
   useEffect(() => {
     fetchCollection<Mark>("marks").then(setMarks);
   }, []);
 
-  const handleEdit = (mark: Mark) => {
-    setEditingMark(mark);
-    setNewMark(false);
-    setId(mark.id);
-    setName(mark.name);
-    setX(String(mark.x));
-    setY(String(mark.y));
-  };
+  const openDialog = (mark: Partial<Mark> = {}) => setCurrentMark(mark);
+  const closeDialog = () => setCurrentMark(null);
 
   const handleSave = async () => {
-    if (newMark) {
-      const newMarkData = {
-        id,
-        name,
-        x: Number(x),
-        y: Number(y),
-      };
-      await setDocument("marks", newMarkData.id, newMarkData);
-      setMarks([...marks, newMarkData]);
-    } else if (editingMark) {
-      const updatedMark = { ...editingMark, id, name, x: Number(x), y: Number(y) };
-      await setDocument("marks", updatedMark.id, updatedMark);
-      setMarks(marks.map((m) => (m.id === updatedMark.id ? updatedMark : m)));
-    }
-    setEditingMark(null);
-    setNewMark(false);
+    if (!currentMark?.id || !currentMark.name) return;
+    await setDocument("marks", currentMark.id, currentMark);
+    setMarks((prev) => {
+      const exists = prev.some((m) => m.id === currentMark.id);
+      return exists ? prev.map((m) => (m.id === currentMark.id ? currentMark as Mark : m)) : [...prev, currentMark as Mark];
+    });
+    closeDialog();
   };
 
   return (
@@ -70,9 +37,7 @@ export default function MarkEditor() {
           <CardTitle>標記</CardTitle>
         </CardHeader>
         <CardContent>
-          <Button onClick={() => { setNewMark(true); setEditingMark(null); setId(""); setName(""); setX(""); setY(""); }}>
-            新增標記
-          </Button>
+          <Button onClick={() => openDialog({ id: "", name: "", x: 0, y: 0 })}>新增標記</Button>
           <Table>
             <TableHeader>
               <TableRow>
@@ -91,7 +56,7 @@ export default function MarkEditor() {
                   <TableCell>{mark.x}</TableCell>
                   <TableCell>{mark.y}</TableCell>
                   <TableCell>
-                    <Button onClick={() => handleEdit(mark)}>編輯</Button>
+                    <Button onClick={() => openDialog(mark)}>編輯</Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -99,25 +64,25 @@ export default function MarkEditor() {
           </Table>
         </CardContent>
       </Card>
-      <Dialog open={!!editingMark || newMark} onOpenChange={() => { setEditingMark(null); setNewMark(false); }}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{newMark ? "新增標記" : "編輯標記"}</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-2">
-            <Input value={id} onChange={(e) => setId(e.target.value)} placeholder="ID" disabled={!newMark} />
-            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="名稱" />
-            <Input value={x} onChange={(e) => setX(e.target.value)} placeholder="X 座標" type="number" />
-            <Input value={y} onChange={(e) => setY(e.target.value)} placeholder="Y 座標" type="number" />
-            <div className="flex space-x-2">
-              <Button onClick={handleSave}>儲存</Button>
-              <Button onClick={() => { setEditingMark(null); setNewMark(false); }} variant="outline">
-                取消
-              </Button>
+      {currentMark && (
+        <Dialog open onOpenChange={closeDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{currentMark.id ? "編輯標記" : "新增標記"}</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-2">
+              <Input value={currentMark.id} onChange={(e) => setCurrentMark({ ...currentMark, id: e.target.value })} placeholder="ID" disabled={!!currentMark.id} />
+              <Input value={currentMark.name} onChange={(e) => setCurrentMark({ ...currentMark, name: e.target.value })} placeholder="名稱" />
+              <Input value={currentMark.x} onChange={(e) => setCurrentMark({ ...currentMark, x: Number(e.target.value) })} placeholder="X 座標" type="number" />
+              <Input value={currentMark.y} onChange={(e) => setCurrentMark({ ...currentMark, y: Number(e.target.value) })} placeholder="Y 座標" type="number" />
+              <div className="flex space-x-2">
+                <Button onClick={handleSave}>儲存</Button>
+                <Button onClick={closeDialog} variant="outline">取消</Button>
+              </div>
             </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }
