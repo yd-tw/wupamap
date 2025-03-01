@@ -85,7 +85,7 @@ export default function MarkEditor() {
                 value={currentMark.id}
                 onChange={(e) => setCurrentMark({ ...currentMark, id: e.target.value })}
                 placeholder="ID"
-                disabled={!!currentMark.id}
+                //disabled={!!currentMark.id}
               />
               <Input
                 value={currentMark.name}
