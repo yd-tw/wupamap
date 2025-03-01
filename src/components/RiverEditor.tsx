@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 export default function RiverEditor() {
   const [rivers, setRivers] = useState<River[]>([]);
   const [selectedRiver, setSelectedRiver] = useState<River | null>(null);
+  const [editedId, setEditedId] = useState("");
   const [editedName, setEditedName] = useState("");
   const [editedPoints, setEditedPoints] = useState<{ x: number; y: number }[]>(
     [],
@@ -37,22 +38,27 @@ export default function RiverEditor() {
 
   const handleEdit = (river: River) => {
     setSelectedRiver(river);
+    setEditedId(river.id);
     setEditedName(river.name);
     setEditedPoints([...river.points]);
     setIsDialogOpen(true);
   };
 
   const handleSave = async () => {
-    if (!selectedRiver) return;
-    const updatedRiver = {
-      ...selectedRiver,
+    if (!editedId) return;
+    const updatedRiver: River = {
+      id: editedId,
       name: editedName,
       points: editedPoints,
+      width: selectedRiver?.width || 0,
     };
     await setDocument("rivers", updatedRiver.id, updatedRiver);
-    setRivers((prev) =>
-      prev.map((r) => (r.id === updatedRiver.id ? updatedRiver : r)),
-    );
+    setRivers((prev) => {
+      const exists = prev.some((r) => r.id === updatedRiver.id);
+      return exists
+        ? prev.map((r) => (r.id === updatedRiver.id ? updatedRiver : r))
+        : [...prev, updatedRiver];
+    });
     setSelectedRiver(null);
     setIsDialogOpen(false);
   };
@@ -70,6 +76,13 @@ export default function RiverEditor() {
           <CardTitle>河流</CardTitle>
         </CardHeader>
         <CardContent>
+          <Button onClick={() => {
+            setSelectedRiver(null);
+            setEditedId("");
+            setEditedName("");
+            setEditedPoints([]);
+            setIsDialogOpen(true);
+          }}>新增河流</Button>
           <Table>
             <TableHeader>
               <TableRow>
@@ -102,51 +115,7 @@ export default function RiverEditor() {
                     </Dialog>
                   </TableCell>
                   <TableCell>
-                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                      <DialogTrigger asChild>
-                        <Button onClick={() => handleEdit(river)}>編輯</Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogTitle>編輯河流</DialogTitle>
-                        <div>
-                          <label>名稱：</label>
-                          <Input
-                            value={editedName}
-                            onChange={(e) => setEditedName(e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <label>座標：</label>
-                          {editedPoints.map((p, index) => (
-                            <div key={index} className="flex gap-2">
-                              <Input
-                                type="number"
-                                value={p.x}
-                                onChange={(e) =>
-                                  updatePoint(
-                                    index,
-                                    "x",
-                                    Number(e.target.value),
-                                  )
-                                }
-                              />
-                              <Input
-                                type="number"
-                                value={p.y}
-                                onChange={(e) =>
-                                  updatePoint(
-                                    index,
-                                    "y",
-                                    Number(e.target.value),
-                                  )
-                                }
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        <Button onClick={handleSave}>保存</Button>
-                      </DialogContent>
-                    </Dialog>
+                    <Button onClick={() => handleEdit(river)}>編輯</Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -154,6 +123,63 @@ export default function RiverEditor() {
           </Table>
         </CardContent>
       </Card>
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          <DialogTitle>{selectedRiver ? "編輯河流" : "新增河流"}</DialogTitle>
+          <div>
+            <label>ID：</label>
+            <Input
+              value={editedId}
+              onChange={(e) => setEditedId(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>名稱：</label>
+            <Input
+              value={editedName}
+              onChange={(e) => setEditedName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>座標：</label>
+            {editedPoints.map((p, index) => (
+              <div key={index} className="flex gap-2">
+                <Input
+                  type="number"
+                  value={p.x}
+                  onChange={(e) =>
+                    updatePoint(
+                      index,
+                      "x",
+                      Number(e.target.value),
+                    )
+                  }
+                />
+                <Input
+                  type="number"
+                  value={p.y}
+                  onChange={(e) =>
+                    updatePoint(
+                      index,
+                      "y",
+                      Number(e.target.value),
+                    )
+                  }
+                />
+              </div>
+            ))}
+            <Button
+              onClick={() =>
+                setEditedPoints([...editedPoints, { x: 0, y: 0 }])
+              }
+            >
+              新增節點
+            </Button>
+          </div>
+          <Button onClick={handleSave}>保存</Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
