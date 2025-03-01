@@ -25,6 +25,8 @@ import { Input } from "@/components/ui/input";
 export default function StationEditor() {
   const [stations, setStations] = useState<Station[]>([]);
   const [editingStation, setEditingStation] = useState<Station | null>(null);
+  const [newStation, setNewStation] = useState(false);
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [x, setX] = useState("");
   const [y, setY] = useState("");
@@ -35,24 +37,30 @@ export default function StationEditor() {
 
   const handleEdit = (station: Station) => {
     setEditingStation(station);
+    setNewStation(false);
+    setId(station.id);
     setName(station.name);
     setX(String(station.x));
     setY(String(station.y));
   };
 
   const handleSave = async () => {
-    if (!editingStation) return;
-    const updatedStation = {
-      ...editingStation,
-      name,
-      x: Number(x),
-      y: Number(y),
-    };
-    await setDocument("stations", updatedStation.id, updatedStation);
-    setStations(
-      stations.map((s) => (s.id === updatedStation.id ? updatedStation : s)),
-    );
+    if (newStation) {
+      const newStationData = {
+        id,
+        name,
+        x: Number(x),
+        y: Number(y),
+      };
+      await setDocument("stations", newStationData.id, newStationData);
+      setStations([...stations, newStationData]);
+    } else if (editingStation) {
+      const updatedStation = { ...editingStation, id, name, x: Number(x), y: Number(y) };
+      await setDocument("stations", updatedStation.id, updatedStation);
+      setStations(stations.map((s) => (s.id === updatedStation.id ? updatedStation : s)));
+    }
     setEditingStation(null);
+    setNewStation(false);
   };
 
   return (
@@ -62,6 +70,9 @@ export default function StationEditor() {
           <CardTitle>車站</CardTitle>
         </CardHeader>
         <CardContent>
+          <Button onClick={() => { setNewStation(true); setEditingStation(null); setId(""); setName(""); setX(""); setY(""); }}>
+            新增車站
+          </Button>
           <Table>
             <TableHeader>
               <TableRow>
@@ -88,46 +99,25 @@ export default function StationEditor() {
           </Table>
         </CardContent>
       </Card>
-      {editingStation && (
-        <Dialog
-          open={!!editingStation}
-          onOpenChange={() => setEditingStation(null)}
-        >
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>編輯車站</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-2">
-              <Input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="名稱"
-              />
-              <Input
-                value={x}
-                onChange={(e) => setX(e.target.value)}
-                placeholder="X 座標"
-                type="number"
-              />
-              <Input
-                value={y}
-                onChange={(e) => setY(e.target.value)}
-                placeholder="Y 座標"
-                type="number"
-              />
-              <div className="flex space-x-2">
-                <Button onClick={handleSave}>儲存</Button>
-                <Button
-                  onClick={() => setEditingStation(null)}
-                  variant="outline"
-                >
-                  取消
-                </Button>
-              </div>
+      <Dialog open={!!editingStation || newStation} onOpenChange={() => { setEditingStation(null); setNewStation(false); }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{newStation ? "新增車站" : "編輯車站"}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-2">
+            <Input value={id} onChange={(e) => setId(e.target.value)} placeholder="ID" disabled={!newStation} />
+            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="名稱" />
+            <Input value={x} onChange={(e) => setX(e.target.value)} placeholder="X 座標" type="number" />
+            <Input value={y} onChange={(e) => setY(e.target.value)} placeholder="Y 座標" type="number" />
+            <div className="flex space-x-2">
+              <Button onClick={handleSave}>儲存</Button>
+              <Button onClick={() => { setEditingStation(null); setNewStation(false); }} variant="outline">
+                取消
+              </Button>
             </div>
-          </DialogContent>
-        </Dialog>
-      )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
