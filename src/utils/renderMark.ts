@@ -2,9 +2,7 @@ import * as d3 from "d3";
 import { Mark } from "@/types/mark";
 import { fetchCollection } from "@/utils/firestore";
 
-export async function renderMark(
-  g: d3.Selection<SVGGElement, unknown, null, undefined>
-) {
+export async function renderMark(g: d3.Selection<SVGGElement, unknown, null, undefined>) {
   const marks = await fetchCollection<Mark>("marks");
   if (marks.length === 0) return;
 
@@ -38,7 +36,7 @@ export async function renderMark(
       infoBox
         .html(
           `<strong>標記：</strong> ${d.name} <br>
-           <strong>座標：</strong> (${d.x}, ${d.y})`
+           <strong>座標：</strong> (${d.x}, ${d.y})`,
         )
         .style("left", `${event.pageX + 10}px`)
         .style("top", `${event.pageY + 10}px`)

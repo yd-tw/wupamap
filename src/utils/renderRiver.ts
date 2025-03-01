@@ -2,9 +2,7 @@ import * as d3 from "d3";
 import { River, Point } from "@/types/river";
 import { fetchCollection } from "./firestore";
 
-export async function renderRiver(
-  g: d3.Selection<SVGGElement, unknown, null, undefined>,
-) {
+export async function renderRiver(g: d3.Selection<SVGGElement, unknown, null, undefined>) {
   const rivers = await fetchCollection<River>("rivers");
   if (rivers.length === 0) return;
 

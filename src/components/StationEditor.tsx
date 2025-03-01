@@ -4,20 +4,8 @@ import { useEffect, useState } from "react";
 import { Station } from "@/types/station";
 import { fetchCollection, setDocument } from "@/utils/firestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -69,7 +57,16 @@ export default function StationEditor() {
           <CardTitle>車站</CardTitle>
         </CardHeader>
         <CardContent>
-          <Button onClick={() => { setNewStation(true); setEditingStation(null); setId(""); setName(""); setX(""); setY(""); }}>
+          <Button
+            onClick={() => {
+              setNewStation(true);
+              setEditingStation(null);
+              setId("");
+              setName("");
+              setX("");
+              setY("");
+            }}
+          >
             新增車站
           </Button>
           <Table>
@@ -98,7 +95,13 @@ export default function StationEditor() {
           </Table>
         </CardContent>
       </Card>
-      <Dialog open={!!editingStation || newStation} onOpenChange={() => { setEditingStation(null); setNewStation(false); }}>
+      <Dialog
+        open={!!editingStation || newStation}
+        onOpenChange={() => {
+          setEditingStation(null);
+          setNewStation(false);
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{newStation ? "新增車站" : "編輯車站"}</DialogTitle>
@@ -110,7 +113,13 @@ export default function StationEditor() {
             <Input value={y} onChange={(e) => setY(e.target.value)} placeholder="Y 座標" type="number" />
             <div className="flex space-x-2">
               <Button onClick={handleSave}>儲存</Button>
-              <Button onClick={() => { setEditingStation(null); setNewStation(false); }} variant="outline">
+              <Button
+                onClick={() => {
+                  setEditingStation(null);
+                  setNewStation(false);
+                }}
+                variant="outline"
+              >
                 取消
               </Button>
             </div>

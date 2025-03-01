@@ -2,9 +2,7 @@ import * as d3 from "d3";
 import { Line, Point } from "@/types/line";
 import { fetchCollection } from "./firestore";
 
-export async function renderLine(
-  g: d3.Selection<SVGGElement, unknown, null, undefined>,
-) {
+export async function renderLine(g: d3.Selection<SVGGElement, unknown, null, undefined>) {
   const lines = await fetchCollection<Line>("lines");
   if (lines.length === 0) return;
 

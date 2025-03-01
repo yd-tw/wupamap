@@ -2,9 +2,7 @@ import * as d3 from "d3";
 import { Station } from "@/types/station";
 import { fetchCollection } from "./firestore";
 
-export async function renderStation(
-  g: d3.Selection<SVGGElement, unknown, null, undefined>,
-) {
+export async function renderStation(g: d3.Selection<SVGGElement, unknown, null, undefined>) {
   const stations = await fetchCollection<Station>("stations");
   if (stations.length === 0) return;
 

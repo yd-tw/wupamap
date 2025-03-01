@@ -1,1 +1,4 @@
-export const plugins = ["prettier-plugin-tailwindcss"];
+export default {
+  printWidth: 120,
+  plugins: ["prettier-plugin-tailwindcss"],
+};

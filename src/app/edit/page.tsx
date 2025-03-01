@@ -5,7 +5,7 @@ import MarkEditor from "@/components/MarkEditor";
 
 export default async function Page() {
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="container mx-auto space-y-6 p-6">
       <h1 className="text-2xl font-bold">地圖資料列表</h1>
       <LineEditor />
       <RiverEditor />
