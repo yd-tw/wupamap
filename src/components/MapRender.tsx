@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { renderStation } from "@/utils/renderStation";
 import { renderLine } from "@/utils/renderLine";
 import { renderRiver } from "@/utils/renderRiver";
+import { renderMark } from "@/utils/renderMark";
 
 interface MapProps {
   center?: { x: number; y: number }; // 預設中心點
@@ -41,6 +42,7 @@ export default function MapRender({
     renderRiver(g);
     renderLine(g);
     renderStation(g);
+    renderMark(g);
 
     // **設定預設位置與縮放**
     const initialTransform = d3.zoomIdentity

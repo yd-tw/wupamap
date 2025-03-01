@@ -1,6 +1,7 @@
 import LineEditor from "@/components/LineEditor";
 import RiverEditor from "@/components/RiverEditor";
 import StationEditor from "@/components/StationEditor";
+import MarkEditor from "@/components/MarkEditor";
 
 export default async function Page() {
   return (
@@ -9,6 +10,7 @@ export default async function Page() {
       <LineEditor />
       <RiverEditor />
       <StationEditor />
+      <MarkEditor />
     </div>
   );
 }

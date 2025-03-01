@@ -1,17 +1,17 @@
 import * as d3 from "d3";
-import { Station } from "@/types/station";
-import { fetchCollection } from "./fetchCollection";
+import { Mark } from "@/types/mark";
+import { fetchCollection } from "@/utils/fetchCollection";
 
-export async function renderStation(
-  g: d3.Selection<SVGGElement, unknown, null, undefined>,
+export async function renderMark(
+  g: d3.Selection<SVGGElement, unknown, null, undefined>
 ) {
-  const stations = await fetchCollection<Station>("stations");
-  if (stations.length === 0) return;
+  const marks = await fetchCollection<Mark>("marks");
+  if (marks.length === 0) return;
 
   const infoBox = d3
     .select("body")
     .append("div")
-    .attr("id", "station-info")
+    .attr("id", "mark-info")
     .style("position", "absolute")
     .style("background", "white")
     .style("border", "1px solid black")
@@ -19,34 +19,34 @@ export async function renderStation(
     .style("display", "none")
     .style("font-size", "12px");
 
-  g.selectAll("circle.station")
-    .data(stations)
+  g.selectAll("circle.mark")
+    .data(marks)
     .join("circle")
     .attr("cx", (d) => d.x)
     .attr("cy", (d) => d.y)
-    .attr("r", 6)
-    .attr("fill", "white")
+    .attr("r", 3)
+    .attr("fill", "black")
     .attr("stroke", "black")
-    .attr("stroke-width", 2)
+    .attr("stroke-width", 1)
     .on("mouseover", function () {
       d3.select(this).attr("fill", "orange");
     })
     .on("mouseout", function () {
-      d3.select(this).attr("fill", "white");
+      d3.select(this).attr("fill", "black");
     })
     .on("click", (event, d) => {
       infoBox
         .html(
-          `<strong>車站：</strong> ${d.name} <br>
-               <strong>座標：</strong> (${d.x}, ${d.y})`,
+          `<strong>標記：</strong> ${d.name} <br>
+           <strong>座標：</strong> (${d.x}, ${d.y})`
         )
         .style("left", `${event.pageX + 10}px`)
         .style("top", `${event.pageY + 10}px`)
         .style("display", "block");
     });
 
-  g.selectAll("text.label.station")
-    .data(stations)
+  g.selectAll("text.label.mark")
+    .data(marks)
     .join("text")
     .attr("class", "label")
     .attr("x", (d) => d.x + 8)
