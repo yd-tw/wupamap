@@ -1,6 +1,6 @@
 {
   "name": "wupamap",
-  "version": "2.1.1",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
