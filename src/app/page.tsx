@@ -49,14 +49,14 @@ export default function Page() {
       </div>
 
       {/* 地圖區塊 */}
-      <div className="h-full w-full bg-[#d3f8e2] animate-fadeIn">
+      <div className="animate-fadeIn h-full w-full bg-[#d3f8e2]">
         <Suspense fallback={<div className="text-center text-gray-500">載入地圖中...</div>}>
           <MapWithParams />
         </Suspense>
       </div>
 
       {/* 底部資訊 */}
-      <div className="absolute bottom-2 right-2 z-10 flex space-x-3 bg-white/80 px-3 py-2 rounded-lg shadow-md">
+      <div className="absolute right-2 bottom-2 z-10 flex space-x-3 rounded-lg bg-white/80 px-3 py-2 shadow-md">
         <p className="text-sm text-gray-700">網站版本: {pkg.version}</p>
         <p className="text-sm text-gray-700">網站作者: YD</p>
       </div>

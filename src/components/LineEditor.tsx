@@ -23,7 +23,7 @@ export default function LineEditor() {
     setIsEditing(true);
   };
 
-  const handleChange = (field: keyof Line, value: any) => {
+  const handleChange = (field: keyof Line, value: string | number) => {
     if (editingLine) {
       setEditingLine({ ...editingLine, [field]: value });
     }

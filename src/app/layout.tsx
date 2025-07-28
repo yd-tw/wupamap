@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
@@ -27,8 +27,8 @@ export default function RootLayout({
   return (
     <html lang="zh-Hant">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <GoogleTagManager gtmId="GTM-TD898CHQ" />
         <Toaster position="bottom-center" />
-        <GoogleAnalytics gaId="G-J0NR2X4QTZ" />
         {children}
       </body>
     </html>

@@ -22,13 +22,13 @@ export default function RiverEditor() {
     fetchCollection<River>("rivers").then(setRivers);
   }, []);
 
-  const handleEdit = (river: River) => {
-    setSelectedRiver(river);
-    setEditedId(river.id);
-    setEditedName(river.name);
-    setEditedPoints([...river.points]);
-    setIsDialogOpen(true);
-  };
+  // const handleEdit = (river: River) => {
+  //   setSelectedRiver(river);
+  //   setEditedId(river.id);
+  //   setEditedName(river.name);
+  //   setEditedPoints([...river.points]);
+  //   setIsDialogOpen(true);
+  // };
 
   const handleSave = async () => {
     if (!editedId) return;
@@ -105,10 +105,12 @@ export default function RiverEditor() {
                     </Dialog>
                   </TableCell>
                   <TableCell>
-                    <Button onClick={() => {
-                      toast.error("功能開發中");
-                      // handleEdit(river)
-                    }}>
+                    <Button
+                      onClick={() => {
+                        toast.error("功能開發中");
+                        // handleEdit(river)
+                      }}
+                    >
                       編輯
                     </Button>
                   </TableCell>
