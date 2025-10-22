@@ -43,7 +43,13 @@ export default function StationEditor() {
       await setDocument("stations", newStationData.id, newStationData);
       setStations([...stations, newStationData]);
     } else if (editingStation) {
-      const updatedStation = { ...editingStation, id, name, x: Number(x), y: Number(y) };
+      const updatedStation = {
+        ...editingStation,
+        id,
+        name,
+        x: Number(x),
+        y: Number(y),
+      };
       await setDocument("stations", updatedStation.id, updatedStation);
       setStations(stations.map((s) => (s.id === updatedStation.id ? updatedStation : s)));
     }
