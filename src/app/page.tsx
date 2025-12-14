@@ -3,7 +3,7 @@
 import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import MapWithParams from "@/components/MapParams";
-import pkg from "../../package.json";
+import pkg from "@/../package.json";
 import Link from "next/link";
 
 export default function Page() {
