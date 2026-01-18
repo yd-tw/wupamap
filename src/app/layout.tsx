@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "嗚帕村",
-  description: "嗚帕捷運公司線上路網圖",
+  description: "嗚帕村線上路網圖",
 };
 
 export default function RootLayout({

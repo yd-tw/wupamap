@@ -43,9 +43,14 @@ export default function Page() {
             定位
           </button>
         </div>
-        <Link href="/edit">
-          <span className="text-blue-500 hover:underline">編輯地圖</span>
-        </Link>
+        <div className="flex items-center space-x-2">
+          <Link href="/edit">
+            <span className="text-blue-500 hover:underline">編輯地圖</span>
+          </Link>
+          <Link href="/docs">
+            <span className="text-blue-500 hover:underline">API 文件</span>
+          </Link>
+        </div>
       </div>
 
       {/* 地圖區塊 */}
