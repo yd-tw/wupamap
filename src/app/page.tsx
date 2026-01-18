@@ -43,7 +43,7 @@ export default function Page() {
             定位
           </button>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-6">
           <Link href="/edit">
             <span className="text-blue-500 hover:underline">編輯地圖</span>
           </Link>
