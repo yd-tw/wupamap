@@ -25,8 +25,8 @@ export default function MapRender({ center = { x: 0, y: 0 }, zoomLevel = 1 }: Ma
       .zoom<SVGSVGElement, unknown>()
       .scaleExtent([0.1, 2])
       .translateExtent([
-        [-2000, -2000],
-        [2000, 2000],
+        [-3500, -3500],
+        [3500, 3500],
       ])
       .on("zoom", (event) => {
         svg.select("g").attr("transform", event.transform.toString());
