@@ -5,7 +5,7 @@ import { Line } from "@/types/line";
 import { fetchCollection, setDocument } from "@/utils/firestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogHeader } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -121,71 +121,7 @@ export default function LineEditor() {
                     </Dialog>
                   </TableCell>
                   <TableCell>
-                    <Dialog open={isEditing} onOpenChange={setIsEditing}>
-                      <DialogTrigger render={<Button onClick={() => handleEdit(line)} />}>編輯</DialogTrigger>
-                      <DialogContent>
-                        <DialogTitle>{newLine ? "新增路線" : `編輯線路 ${editingLine?.name}`}</DialogTitle>
-                        <div className="space-y-2">
-                          <Input
-                            value={editingLine?.id || ""}
-                            onChange={(e) => handleChange("id", e.target.value)}
-                            placeholder="ID"
-                            disabled={!newLine}
-                          />
-                          <Input
-                            value={editingLine?.name || ""}
-                            onChange={(e) => handleChange("name", e.target.value)}
-                            placeholder="名稱"
-                          />
-                          <div className="flex space-x-2">
-                            <Input
-                              type="color"
-                              value={editingLine?.color || "#000000"}
-                              onChange={(e) => handleChange("color", e.target.value)}
-                              className="w-16"
-                            />
-                            <Input
-                              type="number"
-                              value={editingLine?.width || 2}
-                              onChange={(e) => handleChange("width", Number(e.target.value))}
-                              placeholder="寬度"
-                            />
-                          </div>
-                        </div>
-                        <div className="mt-4 text-sm font-medium">節點</div>
-                        {editingLine?.points.map((point, index) => (
-                          <div key={index} className="flex items-center space-x-2">
-                            <span className="w-8 text-sm text-gray-500">{index + 1}.</span>
-                            <Input
-                              type="number"
-                              value={point.x}
-                              onChange={(e) => handlePointChange(index, "x", Number(e.target.value))}
-                              placeholder="X 座標"
-                            />
-                            <Input
-                              type="number"
-                              value={point.y}
-                              onChange={(e) => handlePointChange(index, "y", Number(e.target.value))}
-                              placeholder="Y 座標"
-                            />
-                            <Button
-                              variant="destructive"
-                              size="sm"
-                              onClick={() => handleDeletePoint(index)}
-                              disabled={editingLine?.points.length <= 1}
-                            >
-                              刪除
-                            </Button>
-                          </div>
-                        ))}
-                        <div className="mt-4 flex space-x-2">
-                          <Button variant="outline" onClick={handleAddPoint}>
-                            新增節點
-                          </Button>
-                          <Button onClick={handleSubmit}>保存</Button>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                    <Button onClick={() => handleEdit(line)}>編輯</Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -193,6 +129,72 @@ export default function LineEditor() {
           </Table>
         </CardContent>
       </Card>
+      <Dialog open={isEditing} onOpenChange={setIsEditing}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{newLine ? "新增路線" : `編輯線路 ${editingLine?.name}`}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-2">
+            <Input
+              value={editingLine?.id || ""}
+              onChange={(e) => handleChange("id", e.target.value)}
+              placeholder="ID"
+              disabled={!newLine}
+            />
+            <Input
+              value={editingLine?.name || ""}
+              onChange={(e) => handleChange("name", e.target.value)}
+              placeholder="名稱"
+            />
+            <div className="flex space-x-2">
+              <Input
+                type="color"
+                value={editingLine?.color || "#000000"}
+                onChange={(e) => handleChange("color", e.target.value)}
+                className="w-16"
+              />
+              <Input
+                type="number"
+                value={editingLine?.width || 2}
+                onChange={(e) => handleChange("width", Number(e.target.value))}
+                placeholder="寬度"
+              />
+            </div>
+          </div>
+          <div className="mt-4 text-sm font-medium">節點</div>
+          {editingLine?.points.map((point, index) => (
+            <div key={index} className="flex items-center space-x-2">
+              <span className="w-8 text-sm text-gray-500">{index + 1}.</span>
+              <Input
+                type="number"
+                value={point.x}
+                onChange={(e) => handlePointChange(index, "x", Number(e.target.value))}
+                placeholder="X 座標"
+              />
+              <Input
+                type="number"
+                value={point.y}
+                onChange={(e) => handlePointChange(index, "y", Number(e.target.value))}
+                placeholder="Y 座標"
+              />
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={() => handleDeletePoint(index)}
+                disabled={editingLine?.points.length <= 1}
+              >
+                刪除
+              </Button>
+            </div>
+          ))}
+          <div className="mt-4 flex space-x-2">
+            <Button variant="outline" onClick={handleAddPoint}>
+              新增節點
+            </Button>
+            <Button onClick={handleSubmit}>保存</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
