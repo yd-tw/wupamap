@@ -8,7 +8,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import toast from "react-hot-toast";
 
 export default function StationEditor() {
   const [stations, setStations] = useState<Station[]>([]);
@@ -66,14 +65,12 @@ export default function StationEditor() {
         <CardContent>
           <Button
             onClick={() => {
-              toast.error("功能開發中");
-
-              // setNewStation(true);
-              // setEditingStation(null);
-              // setId("");
-              // setName("");
-              // setX("");
-              // setY("");
+              setNewStation(true);
+              setEditingStation(null);
+              setId("");
+              setName("");
+              setX("");
+              setY("");
             }}
           >
             新增車站
@@ -116,7 +113,8 @@ export default function StationEditor() {
             <DialogTitle>{newStation ? "新增車站" : "編輯車站"}</DialogTitle>
           </DialogHeader>
           <div className="space-y-2">
-            <Input value={id} onChange={(e) => setId(e.target.value)} placeholder="ID" disabled={!newStation} />
+            {/* <Input value={id} onChange={(e) => setId(e.target.value)} placeholder="ID"disabled={!newStation} /> */}
+            <Input value={id} onChange={(e) => setId(e.target.value)} placeholder="ID" />
             <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="名稱" />
             <Input value={x} onChange={(e) => setX(e.target.value)} placeholder="X 座標" type="number" />
             <Input value={y} onChange={(e) => setY(e.target.value)} placeholder="Y 座標" type="number" />
