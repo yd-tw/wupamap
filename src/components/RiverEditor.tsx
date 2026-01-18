@@ -91,9 +91,7 @@ export default function RiverEditor() {
                   <TableCell>{river.width}</TableCell>
                   <TableCell>
                     <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="outline">查看節點</Button>
-                      </DialogTrigger>
+                      <DialogTrigger render={<Button variant="outline" />}>查看節點</DialogTrigger>
                       <DialogContent>
                         <DialogTitle>河流節點</DialogTitle>
                         <ul>

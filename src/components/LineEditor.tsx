@@ -109,9 +109,7 @@ export default function LineEditor() {
                   </TableCell>
                   <TableCell>
                     <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="outline">查看節點</Button>
-                      </DialogTrigger>
+                      <DialogTrigger render={<Button variant="outline" />}>查看節點</DialogTrigger>
                       <DialogContent>
                         <DialogTitle>線路 {line.name} 的節點</DialogTitle>
                         <ul className="space-y-1">
@@ -124,9 +122,7 @@ export default function LineEditor() {
                   </TableCell>
                   <TableCell>
                     <Dialog open={isEditing} onOpenChange={setIsEditing}>
-                      <DialogTrigger asChild>
-                        <Button onClick={() => handleEdit(line)}>編輯</Button>
-                      </DialogTrigger>
+                      <DialogTrigger render={<Button onClick={() => handleEdit(line)} />}>編輯</DialogTrigger>
                       <DialogContent>
                         <DialogTitle>{newLine ? "新增路線" : `編輯線路 ${editingLine?.name}`}</DialogTitle>
                         <div className="space-y-2">
