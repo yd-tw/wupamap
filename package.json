@@ -14,16 +14,16 @@
     "format": "npx prettier --write ."
   },
   "dependencies": {
-    "@base-ui/react": "^1.0.0",
-    "@next/third-parties": "^16.1.3",
+    "@base-ui/react": "^1.1.0",
+    "@next/third-parties": "^16.1.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
     "firebase": "^12.8.0",
     "lucide-react": "^0.555.0",
-    "next": "^16.1.3",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-hot-toast": "^2.6.0",
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7"
@@ -31,12 +31,12 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
     "@types/d3": "^7.4.3",
-    "@types/node": "^24.10.9",
-    "@types/react": "^19.2.8",
+    "@types/node": "^24.10.10",
+    "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.2",
-    "eslint-config-next": "^16.1.3",
-    "prettier": "^3.8.0",
+    "eslint-config-next": "^16.1.6",
+    "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.0",
     "typescript": "^5.9.3"
