@@ -64,8 +64,10 @@ export default function DocsPage() {
           <h2 className="mb-4 text-xl font-semibold text-gray-800">快速開始</h2>
           <p className="mb-4 text-gray-600">
             使用以下 API 端點取得地圖相關資料。所有請求使用{" "}
-            <code className="rounded bg-gray-200 px-2 py-1 text-sm text-emerald-400">GET</code> 方法，回傳 JSON
-            格式資料。
+            <code className="rounded bg-gray-200 px-2 py-1 text-sm text-emerald-400">
+              GET
+            </code>{" "}
+            方法，回傳 JSON 格式資料。
           </p>
         </section>
 
@@ -80,13 +82,19 @@ export default function DocsPage() {
               >
                 {/* Endpoint Header */}
                 <div className="flex items-center gap-4 p-6">
-                  <div className={`rounded-xl bg-linear-to-br ${endpoint.color} p-3 shadow-lg`}>{endpoint.icon}</div>
+                  <div
+                    className={`rounded-xl bg-linear-to-br ${endpoint.color} p-3 shadow-lg`}
+                  >
+                    {endpoint.icon}
+                  </div>
                   <div className="flex-1">
                     <div className="mb-1 flex items-center gap-3">
                       <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-400">
                         {endpoint.method}
                       </span>
-                      <code className="text-lg font-medium text-gray-800">{endpoint.path}</code>
+                      <code className="text-lg font-medium text-gray-800">
+                        {endpoint.path}
+                      </code>
                     </div>
                     <p className="text-gray-600">{endpoint.description}</p>
                   </div>

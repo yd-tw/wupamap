@@ -55,7 +55,11 @@ export default function Page() {
 
       {/* 地圖區塊 */}
       <div className="animate-fadeIn h-full w-full bg-[#d3f8e2]">
-        <Suspense fallback={<div className="text-center text-gray-500">載入地圖中...</div>}>
+        <Suspense
+          fallback={
+            <div className="text-center text-gray-500">載入地圖中...</div>
+          }
+        >
           <MapWithParams />
         </Suspense>
       </div>

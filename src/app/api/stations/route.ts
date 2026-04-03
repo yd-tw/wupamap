@@ -14,6 +14,9 @@ export async function GET() {
     return NextResponse.json(stations);
   } catch (error) {
     console.error("Error fetching stations:", error);
-    return NextResponse.json({ error: "Failed to fetch stations" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch stations" },
+      { status: 500 },
+    );
   }
 }

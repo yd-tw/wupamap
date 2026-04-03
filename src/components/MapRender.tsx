@@ -12,7 +12,10 @@ interface MapProps {
   zoomLevel?: number; // 預設縮放倍率
 }
 
-export default function MapRender({ center = { x: 0, y: 0 }, zoomLevel = 1 }: MapProps) {
+export default function MapRender({
+  center = { x: 0, y: 0 },
+  zoomLevel = 1,
+}: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -42,7 +45,9 @@ export default function MapRender({ center = { x: 0, y: 0 }, zoomLevel = 1 }: Ma
     renderMark(g);
 
     // **設定預設位置與縮放**
-    const initialTransform = d3.zoomIdentity.translate(-center.x * zoomLevel, -center.y * zoomLevel).scale(zoomLevel);
+    const initialTransform = d3.zoomIdentity
+      .translate(-center.x * zoomLevel, -center.y * zoomLevel)
+      .scale(zoomLevel);
     svg.transition().duration(750).call(zoom.transform, initialTransform);
   }, [center, zoomLevel]);
 

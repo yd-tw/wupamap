@@ -2,10 +2,26 @@
 
 import { useEffect, useState } from "react";
 import { Mark } from "@/types/mark";
-import { fetchCollection, setDocument, deleteDocument } from "@/utils/firestore";
+import {
+  fetchCollection,
+  setDocument,
+  deleteDocument,
+} from "@/utils/firestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -44,7 +60,9 @@ export default function MarkEditor() {
           <CardTitle>標記</CardTitle>
         </CardHeader>
         <CardContent>
-          <Button onClick={() => openDialog({ id: "", name: "", x: 0, y: 0 })}>新增標記</Button>
+          <Button onClick={() => openDialog({ id: "", name: "", x: 0, y: 0 })}>
+            新增標記
+          </Button>
           <Table>
             <TableHeader>
               <TableRow>
@@ -64,7 +82,10 @@ export default function MarkEditor() {
                   <TableCell>{mark.y}</TableCell>
                   <TableCell className="flex space-x-2">
                     <Button onClick={() => openDialog(mark)}>編輯</Button>
-                    <Button onClick={() => handleDelete(mark.id)} variant="destructive">
+                    <Button
+                      onClick={() => handleDelete(mark.id)}
+                      variant="destructive"
+                    >
                       刪除
                     </Button>
                   </TableCell>
@@ -78,29 +99,39 @@ export default function MarkEditor() {
         <Dialog open onOpenChange={closeDialog}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>{currentMark.id ? "編輯標記" : "新增標記"}</DialogTitle>
+              <DialogTitle>
+                {currentMark.id ? "編輯標記" : "新增標記"}
+              </DialogTitle>
             </DialogHeader>
             <div className="space-y-2">
               <Input
                 value={currentMark.id}
-                onChange={(e) => setCurrentMark({ ...currentMark, id: e.target.value })}
+                onChange={(e) =>
+                  setCurrentMark({ ...currentMark, id: e.target.value })
+                }
                 placeholder="ID"
                 //disabled={!!currentMark.id}
               />
               <Input
                 value={currentMark.name}
-                onChange={(e) => setCurrentMark({ ...currentMark, name: e.target.value })}
+                onChange={(e) =>
+                  setCurrentMark({ ...currentMark, name: e.target.value })
+                }
                 placeholder="名稱"
               />
               <Input
                 value={currentMark.x}
-                onChange={(e) => setCurrentMark({ ...currentMark, x: Number(e.target.value) })}
+                onChange={(e) =>
+                  setCurrentMark({ ...currentMark, x: Number(e.target.value) })
+                }
                 placeholder="X 座標"
                 type="number"
               />
               <Input
                 value={currentMark.y}
-                onChange={(e) => setCurrentMark({ ...currentMark, y: Number(e.target.value) })}
+                onChange={(e) =>
+                  setCurrentMark({ ...currentMark, y: Number(e.target.value) })
+                }
                 placeholder="Y 座標"
                 type="number"
               />

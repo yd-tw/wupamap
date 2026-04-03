@@ -4,8 +4,21 @@ import { useEffect, useState } from "react";
 import { Line } from "@/types/line";
 import { fetchCollection, setDocument } from "@/utils/firestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogHeader } from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+  DialogHeader,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -30,7 +43,11 @@ export default function LineEditor() {
     }
   };
 
-  const handlePointChange = (index: number, field: "x" | "y", value: number) => {
+  const handlePointChange = (
+    index: number,
+    field: "x" | "y",
+    value: number,
+  ) => {
     if (editingLine) {
       const updatedPoints = [...editingLine.points];
       updatedPoints[index] = { ...updatedPoints[index], [field]: value };
@@ -41,7 +58,10 @@ export default function LineEditor() {
   const handleAddPoint = () => {
     if (editingLine) {
       const newPoint = { x: 0, y: 0 };
-      setEditingLine({ ...editingLine, points: [...editingLine.points, newPoint] });
+      setEditingLine({
+        ...editingLine,
+        points: [...editingLine.points, newPoint],
+      });
     }
   };
 
@@ -59,7 +79,9 @@ export default function LineEditor() {
         setLines((prev) => [...prev, editingLine]);
         setNewLine(false);
       } else {
-        setLines((prev) => prev.map((l) => (l.id === editingLine.id ? editingLine : l)));
+        setLines((prev) =>
+          prev.map((l) => (l.id === editingLine.id ? editingLine : l)),
+        );
       }
       setEditingLine(null);
       setIsEditing(false);
@@ -105,11 +127,16 @@ export default function LineEditor() {
                   <TableCell>{line.name}</TableCell>
                   <TableCell>{line.width}</TableCell>
                   <TableCell>
-                    <div className="h-6 w-6 rounded-full" style={{ backgroundColor: line.color }} />
+                    <div
+                      className="h-6 w-6 rounded-full"
+                      style={{ backgroundColor: line.color }}
+                    />
                   </TableCell>
                   <TableCell>
                     <Dialog>
-                      <DialogTrigger render={<Button variant="outline" />}>查看節點</DialogTrigger>
+                      <DialogTrigger render={<Button variant="outline" />}>
+                        查看節點
+                      </DialogTrigger>
                       <DialogContent>
                         <DialogTitle>線路 {line.name} 的節點</DialogTitle>
                         <ul className="space-y-1">
@@ -132,9 +159,11 @@ export default function LineEditor() {
       <Dialog open={isEditing} onOpenChange={setIsEditing}>
         <DialogContent className="flex max-h-[90vh] flex-col">
           <DialogHeader>
-            <DialogTitle>{newLine ? "新增路線" : `編輯線路 ${editingLine?.name}`}</DialogTitle>
+            <DialogTitle>
+              {newLine ? "新增路線" : `編輯線路 ${editingLine?.name}`}
+            </DialogTitle>
           </DialogHeader>
-          <div className="flex-1 overflow-y-auto space-y-4 pr-1">
+          <div className="flex-1 space-y-4 overflow-y-auto pr-1">
             <div className="space-y-2">
               <Input
                 value={editingLine?.id || ""}
@@ -157,7 +186,9 @@ export default function LineEditor() {
                 <Input
                   type="number"
                   value={editingLine?.width || 2}
-                  onChange={(e) => handleChange("width", Number(e.target.value))}
+                  onChange={(e) =>
+                    handleChange("width", Number(e.target.value))
+                  }
                   placeholder="寬度"
                 />
               </div>
@@ -166,17 +197,23 @@ export default function LineEditor() {
             <div className="space-y-2">
               {editingLine?.points.map((point, index) => (
                 <div key={index} className="flex items-center space-x-2">
-                  <span className="w-8 text-sm text-gray-500">{index + 1}.</span>
+                  <span className="w-8 text-sm text-gray-500">
+                    {index + 1}.
+                  </span>
                   <Input
                     type="number"
                     value={point.x}
-                    onChange={(e) => handlePointChange(index, "x", Number(e.target.value))}
+                    onChange={(e) =>
+                      handlePointChange(index, "x", Number(e.target.value))
+                    }
                     placeholder="X 座標"
                   />
                   <Input
                     type="number"
                     value={point.y}
-                    onChange={(e) => handlePointChange(index, "y", Number(e.target.value))}
+                    onChange={(e) =>
+                      handlePointChange(index, "y", Number(e.target.value))
+                    }
                     placeholder="Y 座標"
                   />
                   <Button

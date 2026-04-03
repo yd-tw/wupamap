@@ -14,6 +14,9 @@ export async function GET() {
     return NextResponse.json(rivers);
   } catch (error) {
     console.error("Error fetching rivers:", error);
-    return NextResponse.json({ error: "Failed to fetch rivers" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch rivers" },
+      { status: 500 },
+    );
   }
 }

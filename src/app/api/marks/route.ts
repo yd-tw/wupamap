@@ -14,6 +14,9 @@ export async function GET() {
     return NextResponse.json(marks);
   } catch (error) {
     console.error("Error fetching marks:", error);
-    return NextResponse.json({ error: "Failed to fetch marks" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch marks" },
+      { status: 500 },
+    );
   }
 }

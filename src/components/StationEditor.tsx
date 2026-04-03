@@ -4,8 +4,20 @@ import { useEffect, useState } from "react";
 import { Station } from "@/types/station";
 import { fetchCollection, setDocument } from "@/utils/firestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -50,7 +62,9 @@ export default function StationEditor() {
         y: Number(y),
       };
       await setDocument("stations", updatedStation.id, updatedStation);
-      setStations(stations.map((s) => (s.id === updatedStation.id ? updatedStation : s)));
+      setStations(
+        stations.map((s) => (s.id === updatedStation.id ? updatedStation : s)),
+      );
     }
     setEditingStation(null);
     setNewStation(false);
@@ -114,10 +128,28 @@ export default function StationEditor() {
           </DialogHeader>
           <div className="space-y-2">
             {/* <Input value={id} onChange={(e) => setId(e.target.value)} placeholder="ID"disabled={!newStation} /> */}
-            <Input value={id} onChange={(e) => setId(e.target.value)} placeholder="ID" />
-            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="名稱" />
-            <Input value={x} onChange={(e) => setX(e.target.value)} placeholder="X 座標" type="number" />
-            <Input value={y} onChange={(e) => setY(e.target.value)} placeholder="Y 座標" type="number" />
+            <Input
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              placeholder="ID"
+            />
+            <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="名稱"
+            />
+            <Input
+              value={x}
+              onChange={(e) => setX(e.target.value)}
+              placeholder="X 座標"
+              type="number"
+            />
+            <Input
+              value={y}
+              onChange={(e) => setY(e.target.value)}
+              placeholder="Y 座標"
+              type="number"
+            />
             <div className="flex space-x-2">
               <Button onClick={handleSave}>儲存</Button>
               <Button

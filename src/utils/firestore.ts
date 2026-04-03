@@ -1,4 +1,11 @@
-import { collection, deleteDoc, doc, DocumentData, getDocs, setDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  DocumentData,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import db from "@/lib/firebase";
 
 export async function fetchCollection<T>(collectionName: string): Promise<T[]> {
@@ -25,7 +32,10 @@ export async function setDocument<T extends DocumentData>(
     await setDoc(doc(db, collectionName, docId), data);
     return true;
   } catch (error) {
-    console.error(`寫入 Firestore 文件 (${collectionName}/${docId}) 時出錯:`, error);
+    console.error(
+      `寫入 Firestore 文件 (${collectionName}/${docId}) 時出錯:`,
+      error,
+    );
     return false;
   }
 }

@@ -14,6 +14,9 @@ export async function GET() {
     return NextResponse.json(lines);
   } catch (error) {
     console.error("Error fetching lines:", error);
-    return NextResponse.json({ error: "Failed to fetch lines" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch lines" },
+      { status: 500 },
+    );
   }
 }
