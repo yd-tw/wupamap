@@ -29,7 +29,7 @@ export default function MapRender({
       .scaleExtent([0.1, 2])
       .translateExtent([
         [-3500, -3500],
-        [3500, 3500],
+        [2500, 5000],
       ])
       .on("zoom", (event) => {
         svg.select("g").attr("transform", event.transform.toString());
