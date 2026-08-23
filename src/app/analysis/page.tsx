@@ -4,12 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Line } from "@/types/line";
 import { fetchCollection } from "@/utils/firestore";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -83,7 +78,7 @@ export default function AnalysisPage() {
       <div className="mx-auto max-w-3xl space-y-4">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-gray-800">路線分析</h1>
-          <Link href="/" className="text-blue-500 hover:underline text-sm">
+          <Link href="/" className="text-sm text-blue-500 hover:underline">
             返回首頁
           </Link>
         </div>
@@ -94,7 +89,7 @@ export default function AnalysisPage() {
           </CardHeader>
           <CardContent>
             {loading ? (
-              <p className="text-gray-500 text-sm">載入中...</p>
+              <p className="text-sm text-gray-500">載入中...</p>
             ) : (
               <Table>
                 <TableHeader>
@@ -107,13 +102,13 @@ export default function AnalysisPage() {
                       路線名稱{sortIndicator("name")}
                     </TableHead>
                     <TableHead
-                      className="cursor-pointer select-none text-right"
+                      className="cursor-pointer text-right select-none"
                       onClick={() => handleSort("points")}
                     >
                       節點數{sortIndicator("points")}
                     </TableHead>
                     <TableHead
-                      className="cursor-pointer select-none text-right"
+                      className="cursor-pointer text-right select-none"
                       onClick={() => handleSort("length")}
                     >
                       總長度{sortIndicator("length")}
